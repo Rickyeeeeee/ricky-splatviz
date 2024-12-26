@@ -142,10 +142,12 @@ class Splatviz(imgui_window.ImguiWindow):
 
         # Control pane
         imgui.set_next_window_pos(imgui.ImVec2(0, 0))
-        imgui.set_next_window_size(imgui.ImVec2(self.pane_w, self.content_height))
-        control_pane_flags = WINDOW_NO_TITLE_BAR | WINDOW_NO_RESIZE | WINDOW_NO_MOVE
+        control_pane_flags = WINDOW_NO_TITLE_BAR
         imgui.begin("##control_pane", p_open=True, flags=control_pane_flags)
 
+        # Get control panel width from the first widget.
+        self.pane_w = imgui.get_window_width()
+        
         # Widgets
         for widget in self.widgets:
             expanded, _visible = imgui_utils.collapsing_header(widget.name, default=widget.name == "Load")
