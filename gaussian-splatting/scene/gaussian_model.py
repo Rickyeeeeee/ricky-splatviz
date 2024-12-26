@@ -91,20 +91,25 @@ class GaussianModel:
     def restore(self, model_args, training_args):
         (self.active_sh_degree, 
         self._xyz, 
+        _,
         self._features_dc, 
         self._features_rest,
         self._scaling, 
         self._rotation, 
         self._opacity,
         self.max_radii2D, 
+        _,
+        _,
         xyz_gradient_accum, 
+        _,
         denom,
         opt_dict, 
         self.spatial_lr_scale) = model_args
-        self.training_setup(training_args)
+        if training_args is not None:
+            self.training_setup(training_args)
         self.xyz_gradient_accum = xyz_gradient_accum
         self.denom = denom
-        self.optimizer.load_state_dict(opt_dict)
+        # self.optimizer.load_state_dict(opt_dict)
 
     @property
     def get_scaling(self):

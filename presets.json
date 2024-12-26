@@ -355,5 +355,74 @@
         "_id": "0322bb55-e637-46f1-9eec-5de721ec36e4"
       }
     ]
+  },
+  "vis_xyz_accum_grad": {
+    "edit_text": "from utils.sh_utils import RGB2SH\n\nmask = gs.xyz_gradient_accum > slider.threshold\n\ngs._features_dc[mask] = RGB2SH(torch.tensor(np.asarray([1.0,0.0,0.0])).float().cuda())\n\ngs._xyz = gs._xyz\ngs._rotation = gs._rotation\ngs._scaling = gs._scaling\ngs._opacity = gs._opacity\ngs._features_dc = gs._features_dc\ngs._features_rest = gs._features_rest",
+    "slider": [
+      {
+        "key": "threshold",
+        "value": 0.03799999877810478,
+        "min_value": 0.0,
+        "max_value": 0.10000000149011612,
+        "_id": "a8f2a853-17ba-4f7f-9dd8-843d2f0756a1"
+      }
+    ]
+  },
+  "vis_xyz_accum_gradient_v2": {
+    "edit_text": "from utils.sh_utils import RGB2SH\n\nmask = gs.xyz_gradient_accum > slider.threshold\n\ngs._features_dc[mask] = RGB2SH(torch.tensor(np.asarray([1.0,0.0,0.0])).float().cuda())\nslider_only_tensor = torch.tensor(slider.only)\ngs._features_dc[~mask] = torch.where(slider_only_tensor > 0.5,RGB2SH(torch.tensor([0.0, 0.0, 0.0], dtype=torch.float32).cuda()),gs._features_dc[~mask])\n\ngs._xyz = gs._xyz\ngs._rotation = gs._rotation\ngs._scaling = gs._scaling\ngs._opacity = gs._opacity\ngs._features_dc = gs._features_dc\ngs._features_rest = gs._features_rest",
+    "slider": [
+      {
+        "key": "threshold",
+        "value": 0.03799999877810478,
+        "min_value": 0.0,
+        "max_value": 0.10000000149011612,
+        "_id": "a8f2a853-17ba-4f7f-9dd8-843d2f0756a1"
+      },
+      {
+        "key": "only",
+        "value": 0.13600000739097595,
+        "min_value": 0.0,
+        "max_value": 1.0,
+        "_id": "3f22def5-090c-4006-bf0d-798690ea40fd"
+      }
+    ]
+  },
+  "vis_xyz_accum_gradient": {
+    "edit_text": "from utils.sh_utils import RGB2SH\n\nmask = (gs.xyz_gradient_accum / gs.denom) > slider.threshold\n\ngs._features_dc[mask] = RGB2SH(torch.tensor(np.asarray([1.0,0.0,0.0])).float().cuda())\nslider_only_tensor = torch.tensor(slider.only)\ngs._features_dc[~mask] = torch.where(slider_only_tensor > 0.5,RGB2SH(torch.tensor([0.0, 0.0, 0.0], dtype=torch.float32).cuda()),gs._features_dc[~mask])\n\ngs._xyz = gs._xyz\ngs._rotation = gs._rotation\ngs._scaling = gs._scaling\ngs._opacity = gs._opacity\ngs._features_dc = gs._features_dc\ngs._features_rest = gs._features_rest",
+    "slider": [
+      {
+        "key": "threshold",
+        "value": 0.0010000000474974513,
+        "min_value": 0.0,
+        "max_value": 0.0010000000474974513,
+        "_id": "a8f2a853-17ba-4f7f-9dd8-843d2f0756a1"
+      },
+      {
+        "key": "only",
+        "value": 0.382999986410141,
+        "min_value": 0.0,
+        "max_value": 1.0,
+        "_id": "3f22def5-090c-4006-bf0d-798690ea40fd"
+      }
+    ]
+  },
+  "viz_xyz_accum_gradient": {
+    "edit_text": "from utils.sh_utils import RGB2SH\n\nmask = (gs.xyz_gradient_accum / gs.denom) > slider.threshold\n\ngs._features_dc[mask] = RGB2SH(torch.tensor(np.asarray([1.0,0.0,0.0])).float().cuda())\nslider_only_tensor = torch.tensor(slider.only)\ngs._features_dc[~mask] = torch.where(slider_only_tensor > 0.5,RGB2SH(torch.tensor([0.0, 0.0, 0.0], dtype=torch.float32).cuda()),gs._features_dc[~mask])\n\ngs._xyz = gs._xyz\ngs._rotation = gs._rotation\ngs._scaling = gs._scaling\ngs._opacity = gs._opacity\ngs._features_dc = gs._features_dc\ngs._features_rest = gs._features_rest",
+    "slider": [
+      {
+        "key": "threshold",
+        "value": 0.0007999999797903001,
+        "min_value": 0.0,
+        "max_value": 0.0010000000474974513,
+        "_id": "a8f2a853-17ba-4f7f-9dd8-843d2f0756a1"
+      },
+      {
+        "key": "only",
+        "value": 0.4000000059604645,
+        "min_value": 0.0,
+        "max_value": 1.0,
+        "_id": "3f22def5-090c-4006-bf0d-798690ea40fd"
+      }
+    ]
   }
 }

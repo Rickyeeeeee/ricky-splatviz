@@ -113,6 +113,10 @@ class GaussianRenderer(Renderer):
             model.load_ply(ply_file_path)
         elif ply_file_path.endswith("compression_config.yml"):
             model = run_single_decompression(Path(ply_file_path).parent.absolute())
+        elif ply_file_path.endswith(".pth"):
+            model = GaussianModel(sh_degree=3, disable_xyz_log_activation=True)
+            (model_params, first_iter) = torch.load(ply_file_path)
+            model.restore(model_params, None)
         else:
             raise NotImplementedError("Only .ply or .yml files are supported.")
         return model
